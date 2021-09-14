@@ -2,6 +2,8 @@ package org.xerris.core;
 
 import org.xerris.core.exceptions.ArgumentException;
 
+import java.util.function.Predicate;
+
 public class Range<T extends Comparable<T>> {
     private final T start;
     private final T end;
@@ -18,5 +20,11 @@ public class Range<T extends Comparable<T>> {
 
     public boolean includes(T subject) {
         return subject.compareTo(start) >= 0 && subject.compareTo(end) <= 0;
+    }
+
+    public void forEach(Runnable task, Predicate<T> incrementor) {
+        for (T x = start; x.compareTo(end) <= 0; incrementor.test(x)) {
+            task.run();;
+        }
     }
 }
