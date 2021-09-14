@@ -7,6 +7,8 @@ import org.joda.time.LocalDate;
 
 public class DatePredicates {
     public static Predicate<LocalDate> NotNull = Objects::nonNull;
+    public static BiPredicate<LocalDate, LocalDate> Equals = (value, target) -> value.compareTo(target) == 0;
+    public static BiPredicate<LocalDate, LocalDate> NotEqual = (value, target) -> value.compareTo(target) != 0;
     public static BiPredicate<LocalDate, LocalDate> LessThan = (value, target) -> value.compareTo(target) < 0;
     public static BiPredicate<LocalDate, LocalDate> GreaterThan = (value, target) -> value.compareTo(target) > 0;
     public static BiPredicate<LocalDate, LocalDate> LessThanEqual = (value, target) -> value.compareTo(target) <= 0;

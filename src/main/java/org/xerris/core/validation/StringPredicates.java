@@ -1,10 +1,13 @@
 package org.xerris.core.validation;
 
 import java.util.Objects;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class StringPredicates {
     public static Predicate<Object> NotNull = Objects::nonNull;
+    public static BiPredicate<String, String> Equals = (String one, String two) -> one == two;
+    public static BiPredicate<String, String> NotEqual = (String one, String two) -> one != two;
     public static Predicate<String> NotEmpty = (String s) -> NotNull.test(s) && !s.isEmpty();
     public static Predicate<String> Email = (String s) -> s.matches("^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$");
     public static Predicate<String> Numeric = (String s) -> s.matches("^([-+]?[0-9]\\d*(\\.\\d+)?|[0]*\\.\\d\\d*)$");

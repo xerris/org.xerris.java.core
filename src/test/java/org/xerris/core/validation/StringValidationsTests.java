@@ -3,18 +3,37 @@ package org.xerris.core.validation;
 import org.junit.jupiter.api.Test;
 
 import static org.xerris.core.validation.StringPredicates.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-public class StringValidationsTests {
+public class StringValidationsTests extends BaseValidationTests {
+
+    @Test
+    public void Equals() {
+        Validate.begin().is("one", Equals, "one", "one  == one").check();
+        Validate.begin().is(null, Equals, null, "one  == one").check();
+
+        shouldFail(Validate.begin().is(null, Equals, "", "not equal"));
+        shouldFail(Validate.begin().is("one", Equals, "two", "one != two"));
+    }
+
+    @Test
+    public void NotEqual() {
+        Validate.begin().is("one", NotEqual, "two", "one  == one").check();
+        Validate.begin().is(null, NotEqual, "", "one  == one").check();
+
+        shouldFail(Validate.begin().is(null, NotEqual, null, "not equal"));
+        shouldFail(Validate.begin().is("one", NotEqual, "one", "one != two"));
+    }
+
+    @Test
+    public void NotNull() {
+        Validate.begin().is(NotNull, "hi", "not null").check();
+        shouldFail(Validate.begin().is(NotNull, null, "is null"));
+    }
 
     @Test
     public void isNotEmpty() {
         Validate.begin().is(NotEmpty, "hi", "should not be empty").check();
-    }
-
-    @Test
-    public void isNotEmpty_empty() {
-        shouldFail(Validate.begin().is(NotEmpty, "", "should be empty"));
+        shouldFail(Validate.begin().is(NotEmpty, "", "should not be empty"));
     }
 
     @Test
@@ -47,9 +66,5 @@ public class StringValidationsTests {
                            .is(NotEmpty, null, "two")
                            .is(NotEmpty, "three", "three")
         );
-    }
-
-    private void shouldFail(Validate validate) {
-        assertThatThrownBy(validate::check) .isInstanceOf(ValidationException.class);
     }
 }
