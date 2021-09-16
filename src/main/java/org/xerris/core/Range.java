@@ -24,7 +24,7 @@ public class Range<T extends Comparable<T>> {
 
     public void forEach(Runnable task, Predicate<T> incrementor) {
         for (T x = start; x.compareTo(end) <= 0; incrementor.test(x)) {
-            task.run();;
+            task.run();
         }
     }
 }

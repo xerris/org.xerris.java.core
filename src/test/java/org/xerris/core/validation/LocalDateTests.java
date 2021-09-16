@@ -1,14 +1,14 @@
 package org.xerris.core.validation;
 
-import org.joda.time.LocalDate;
 import org.junit.jupiter.api.Test;
+import java.time.LocalDateTime;
 
 import static org.xerris.core.validation.DatePredicates.*;
 
 public class LocalDateTests extends BaseValidationTests {
-    private final LocalDate dec31 = LocalDate.parse("2019-12-31");
-    private final LocalDate jan1 = LocalDate.parse("2020-01-01");
-    private final LocalDate jan2 = LocalDate.parse("2020-01-02");
+    private final LocalDateTime dec31 = LocalDateTime.of(2019, 12, 31, 0, 0, 0);
+    private final LocalDateTime jan1 = LocalDateTime.of(2020, 1, 1, 0,0,0);
+    private final LocalDateTime jan2 = LocalDateTime.of(2020,1,2,0,0,0);
 
     @Test
     public void  notNull() {

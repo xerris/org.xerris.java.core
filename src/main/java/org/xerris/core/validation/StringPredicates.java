@@ -6,9 +6,10 @@ import java.util.function.Predicate;
 
 public class StringPredicates {
     public static Predicate<Object> NotNull = Objects::nonNull;
-    public static BiPredicate<String, String> Equals = (String one, String two) -> one == two;
-    public static BiPredicate<String, String> NotEqual = (String one, String two) -> one != two;
-    public static Predicate<String> NotEmpty = (String s) -> NotNull.test(s) && !s.isEmpty();
+    public static Predicate<String> NotBlank = (String s) -> !s.isBlank();
+    public static BiPredicate<String, String> Equals = Objects::equals;
+    public static BiPredicate<String, String> NotEqual = (String one, String two) -> !Objects.equals(one, two);
+    public static Predicate<String> NotEmpty = (String s) -> NotNull.test(s) && !s.trim().isEmpty();
     public static Predicate<String> Email = (String s) -> s.matches("^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$");
     public static Predicate<String> Numeric = (String s) -> s.matches("^([-+]?[0-9]\\d*(\\.\\d+)?|[0]*\\.\\d\\d*)$");
     public static Predicate<String> Integer = (String s) -> s.matches("^([-+]?[0-9]\\d*)$");
