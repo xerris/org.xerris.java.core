@@ -1,14 +1,17 @@
-package org.xerris.core;
+package org.xerris.core.range;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.xerris.core.Person;
 import org.xerris.core.exceptions.ArgumentException;
 
 import static com.google.common.truth.Truth.assertThat;
 
 public class RangeTests {
+
+    private int count;
 
     @Test
     public void create() {
@@ -42,4 +45,41 @@ public class RangeTests {
         Range<Float> range = new Range<>(1.0f, 1.2f);
         assertThat(range.includes(1.200001f)).isFalse();
     }
+
+    @Test
+    public void forEach_incrementorOnConstructor() {
+        Range<Integer> range = new Range<>(1, 5, (x) -> x + 1);
+        count =0;
+        range.forEach(() -> count +=1 );
+        assertThat(count).isEqualTo(5);
+    }
+
+    @Test
+    public void forEach_incrementorOnForEach() {
+        Range<Integer> range = new Range<>(1, 5);
+        count =0;
+        range.forEach((x) -> x + 1, () -> count +=1);
+        assertThat(count).isEqualTo(5);
+    }
+
+    @Test
+    public void forEach_withTypedParameterAndIncrementorInConstructor() {
+        Person littleJoey = new Person("Joey", 1);
+        assertThat(littleJoey.getAge()).isEqualTo(1);
+
+        new Range<>(1, 5, x -> x+=1).forEach(littleJoey, Person::birthday);
+
+        assertThat(littleJoey.getAge()).isEqualTo(6);
+    }
+
+    @Test
+    public void forEach_withTypedParameterAndIncrementorMethodArgument() {
+        Person littleJoey = new Person("Joey", 0);
+        assertThat(littleJoey.getAge()).isEqualTo(0);
+
+        new Range<>(1, 5).forEach(x -> x+=1, littleJoey, Person::birthday);
+
+        assertThat(littleJoey.getAge()).isEqualTo(5);
+    }
+
 }
