@@ -17,13 +17,9 @@ public abstract class BaseValidator<T extends Comparable<T>> implements IValidat
         this.subject = subject;
     }
 
-    protected T subject() {
-        return subject;
-    }
+    protected T subject() { return subject; }
 
-    protected Validate validate() {
-        return validate;
-    }
+    protected Validate validate() { return validate; }
 
     protected Validate add(Predicate<T> predicate, String message) {
         return validate.add(predicate, subject, message);
@@ -36,6 +32,7 @@ public abstract class BaseValidator<T extends Comparable<T>> implements IValidat
     public Validate notNull(String message) {
         return add(notNull, message);
     }
+
     public Validate isNull(String message) {
         return add(isNull, message);
     }
@@ -68,6 +65,7 @@ public abstract class BaseValidator<T extends Comparable<T>> implements IValidat
         if (isNull.test(one) && isNull.test(two)) return true;
         return false;
     };
+
     private final BiPredicate<T, T> notEqualTo = (T one, T two) -> !equalTo.test(one, two);
     private final BiPredicate<T, T> greaterThan = (T one, T two) -> one.compareTo(two) > 0;
     private final BiPredicate<T, T> greaterThanOrEqualTo = (T one, T two) -> one.compareTo(two) >= 0;

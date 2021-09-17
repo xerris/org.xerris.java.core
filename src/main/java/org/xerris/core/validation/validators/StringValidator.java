@@ -3,7 +3,6 @@ package org.xerris.core.validation.validators;
 import org.xerris.core.validation.Validate;
 
 import java.util.Objects;
-import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class StringValidator extends BaseValidator<String> {
@@ -13,6 +12,7 @@ public class StringValidator extends BaseValidator<String> {
     }
 
     public Validate notEmpty(String message) { return add(notEmpty, message); }
+    public Validate notBlank(String message) { return add(notBlank, message); }
     public Validate anEmail(String message) { return add(email, message);  }
     public Validate aPhoneNumber(String message) { return add(PhoneNumber, message); }
     public Validate anInteger(String message) { return add(Integer, message); }

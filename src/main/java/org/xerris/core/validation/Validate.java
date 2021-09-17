@@ -1,9 +1,6 @@
 package org.xerris.core.validation;
 
-import org.xerris.core.validation.validators.IValidator;
-import org.xerris.core.validation.validators.LocalDateTimeValidator;
-import org.xerris.core.validation.validators.LocalDateValidator;
-import org.xerris.core.validation.validators.StringValidator;
+import org.xerris.core.validation.validators.*;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
@@ -29,6 +26,9 @@ public class Validate {
         validators.put(String.class, new StringValidator(this));
         validators.put(LocalDateTime.class, new LocalDateTimeValidator(this));
         validators.put(LocalDate.class, new LocalDateValidator(this));
+        validators.put(Integer.class, new IntegerValidator(this));
+        validators.put(Long.class, new LongValidator(this));
+        validators.put(Double.class, new DoubleValidator(this));
 
         result = new ValidationResult();
     }
@@ -70,10 +70,14 @@ public class Validate {
     public StringValidator is(String topic) {
         return (StringValidator)getValidator(String.class, topic);
     }
+    public IntegerValidator is(int topic) { return (IntegerValidator) getValidator(Integer.class, topic); }
+    public LongValidator is(long topic) { return (LongValidator) getValidator(Long.class, topic); }
+    public DoubleValidator is(double topic) { return (DoubleValidator) getValidator(Double.class, topic); }
 
     public LocalDateTimeValidator is(LocalDateTime topic) {
         return (LocalDateTimeValidator)getValidator(LocalDateTime.class, topic);
     }
+
     public LocalDateValidator is(LocalDate topic) {
         return (LocalDateValidator)getValidator(LocalDate.class, topic);
     }

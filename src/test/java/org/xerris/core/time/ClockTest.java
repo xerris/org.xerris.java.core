@@ -16,9 +16,7 @@ public class ClockTest {
     public void endOfTime() {
         LocalDateTime endOfTime = Clock.endOfTime();
         Validate.begin()
-                .is(endOfTime).equalTo(
-                        LocalDateTime.of(9999, 12, 31, 23, 59, 59),
-                        "should match")
+                .is(endOfTime).equalTo(LocalDateTime.MAX,"should match")
                 .check();
     }
 

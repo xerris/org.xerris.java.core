@@ -18,7 +18,5 @@ public class Clock {
         return utc;
     }
 
-    public static LocalDateTime endOfTime() {
-        return LocalDateTime.of(9999,12, 31, 23, 59, 59);
-    }
+    public static LocalDateTime endOfTime() { return LocalDateTime.MAX; }
 }

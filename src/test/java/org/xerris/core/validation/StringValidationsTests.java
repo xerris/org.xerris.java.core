@@ -1,6 +1,7 @@
 package org.xerris.core.validation;
 
 import org.junit.jupiter.api.Test;
+import org.xerris.core.time.Clock;
 
 public class StringValidationsTests extends BaseValidationTests {
 
@@ -56,6 +57,7 @@ public class StringValidationsTests extends BaseValidationTests {
                 .is("123").anInteger("three")
                 .is("123.0").numeric("three")
                 .is("888 472-2222").aPhoneNumber("call me")
+                .is(Clock.local().now()).notNull("shouldn't be null")
                 .check();
     }
 
