@@ -1,33 +1,34 @@
 package org.xerris.core.validation.validators;
 
 import org.xerris.core.validation.Validate;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 import java.util.function.BiPredicate;
 
-public class LocalDateTimeValidator extends BaseChronoLocalDateValidator<LocalDateTime> {
+public class LocalDateValidator extends BaseChronoLocalDateValidator<LocalDate> {
 
-    public LocalDateTimeValidator(Validate validate) {
+    public LocalDateValidator(Validate validate) {
         super(validate);
     }
 
-    protected BiPredicate<LocalDateTime, LocalDateTime> equalTo() {
+    @Override
+    protected BiPredicate<LocalDate, LocalDate> equalTo() {
         return (value, comparator) -> value.compareTo(comparator) ==0;
     }
 
-    public BiPredicate<LocalDateTime, LocalDateTime> greaterThan() {
+    public BiPredicate<LocalDate, LocalDate> greaterThan() {
         return (value, target) -> notNull.test(value) && value.compareTo(target) > 0;
     }
 
-    public BiPredicate<LocalDateTime, LocalDateTime> greaterThanOrEqualTo() {
+    public BiPredicate<LocalDate, LocalDate> greaterThanOrEqualTo() {
         return (value, target) -> notNull.test(value) && value.compareTo(target) >= 0;
     }
 
-    public BiPredicate<LocalDateTime, LocalDateTime> lessThan() {
+    public BiPredicate<LocalDate, LocalDate> lessThan() {
         return (value, target) -> value.compareTo(target) < 0;
     }
 
-    public BiPredicate<LocalDateTime, LocalDateTime> lessThanOrEqualTo() {
+    public BiPredicate<LocalDate, LocalDate> lessThanOrEqualTo() {
         return (value, target) -> notNull.test(value) && value.compareTo(target) <= 0;
     }
 }
-

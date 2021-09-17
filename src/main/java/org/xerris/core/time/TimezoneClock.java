@@ -24,10 +24,7 @@ public class TimezoneClock implements IClock {
     }
 
     @Override
-    public LocalDateTime today() {
-        LocalDateTime now = now();
-        return LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0, 0, 0);
-    }
+    public LocalDate today() { return LocalDate.now(timeZone); }
 
     @Override
     public void freeze() {
@@ -41,6 +38,7 @@ public class TimezoneClock implements IClock {
 
     @Override
     public void thaw() {
+        ClockManager.thaw();
     }
 
     public static TimezoneClock mountain() { return new TimezoneClock(mountainId);}

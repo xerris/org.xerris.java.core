@@ -2,9 +2,11 @@ package org.xerris.core.validation;
 
 import org.xerris.core.validation.validators.IValidator;
 import org.xerris.core.validation.validators.LocalDateTimeValidator;
+import org.xerris.core.validation.validators.LocalDateValidator;
 import org.xerris.core.validation.validators.StringValidator;
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -18,7 +20,6 @@ public class Validate {
     private final List<org.xerris.core.validation.Condition<Predicate, String>> simpleTests;
     private final List<ComparatorCondition<BiPredicate, Object>> compareTests;
     private final ValidationResult result;
-    private final ValidationProxy proxy;
     private Dictionary<Type, IValidator<? extends Object>> validators = new Hashtable<>();
 
     private Validate() {
@@ -27,8 +28,8 @@ public class Validate {
 
         validators.put(String.class, new StringValidator(this));
         validators.put(LocalDateTime.class, new LocalDateTimeValidator(this));
+        validators.put(LocalDate.class, new LocalDateValidator(this));
 
-        proxy = new ValidationProxy(this);
         result = new ValidationResult();
     }
 
@@ -66,20 +67,23 @@ public class Validate {
         }
     }
 
-    public ValidationProxy is() { return proxy; }
-
     public StringValidator is(String topic) {
-        StringValidator validator = (StringValidator)validators.get(String.class);
+        return (StringValidator)getValidator(String.class, topic);
+    }
+
+    public LocalDateTimeValidator is(LocalDateTime topic) {
+        return (LocalDateTimeValidator)getValidator(LocalDateTime.class, topic);
+    }
+    public LocalDateValidator is(LocalDate topic) {
+        return (LocalDateValidator)getValidator(LocalDate.class, topic);
+    }
+
+    private <T> IValidator<T> getValidator(Class<T> target, T topic) {
+        IValidator<T> validator = (IValidator<T>)validators.get(target);
         validator.setSubject(topic);
         return validator;
     }
 
-    public LocalDateTimeValidator is(LocalDateTime value) {
-        LocalDateTimeValidator validator = (LocalDateTimeValidator)validators.get(LocalDateTime.class);
-        validator.setSubject(value);
-        return validator;
-    }
-    
     public <T> Validate add(Predicate<T> predicate, T value, String message) {
         simpleTests.add(Condition.of(predicate, value, message));
         return this;
