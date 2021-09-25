@@ -13,4 +13,9 @@ public class Person {
     public int getAge() { return this.age; }
 
     public void birthday() { age += 1;}
+
+    public Person happyBirthday() {
+        this.age +=1;
+        return this;
+    }
 }
