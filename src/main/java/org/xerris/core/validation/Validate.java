@@ -97,4 +97,9 @@ public class Validate {
         compareTests.add(ComparatorCondition.of(greaterThan, subject, comparison, message));
         return this;
     }
+
+    public <T> Validate isNotNull(T subject, String message) {
+        if (subject != null) return this;
+        throw new ValidationException(message);
+    }
 }
