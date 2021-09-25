@@ -11,7 +11,6 @@ public class LocalDateValidator extends BaseChronoLocalDateValidator<LocalDate> 
         super(validate);
     }
 
-    @Override
     protected BiPredicate<LocalDate, LocalDate> equalTo() {
         return (value, comparator) -> value.compareTo(comparator) ==0;
     }

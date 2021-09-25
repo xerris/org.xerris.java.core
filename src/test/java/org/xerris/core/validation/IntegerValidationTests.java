@@ -8,9 +8,10 @@ public class IntegerValidationTests  extends BaseValidationTests{
 
     @Test
     public void equals() {
-        Validate.begin().is(2, Equals, 2, "2 == 2").check();
-        shouldFail(Validate.begin().is(2, Equals, 1, "2 != 1"));
+        Validate.begin().is(2).equalTo(2, "2 == 2").check();
+        shouldFail(Validate.begin().is(2).equalTo(1, "2 != 1"));
     }
+
     @Test
     public void NotEqual() {
         Validate.begin().is(2,  NotEqual, 1, "2 != 1").check();

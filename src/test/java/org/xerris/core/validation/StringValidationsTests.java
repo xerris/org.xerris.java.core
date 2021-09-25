@@ -52,10 +52,10 @@ public class StringValidationsTests extends BaseValidationTests {
     @Test
     public void isNotEmpty_MultipleHappyTests() {
         Validate.begin()
-                .is("one").notEmpty("one")
-                .is("info@xerris.com").anEmail("two")
-                .is("123").anInteger("three")
-                .is("123.0").numeric("three")
+                .is("one").notEmpty("empty")
+                .is("info@xerris.com").anEmail("should be")
+                .is("123").anInteger("this is a number")
+                .is("123.0").numeric("this is a decimal")
                 .is("888 472-2222").aPhoneNumber("call me")
                 .is(Clock.local().now()).notNull("shouldn't be null")
                 .check();

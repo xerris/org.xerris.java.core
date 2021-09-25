@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 public class LocalDateTests extends BaseValidationTests {
-    private final LocalDateTime dec31 = LocalDateTime.of(2019, 12, 31, 0, 0, 0);
-    private final LocalDateTime jan1 = LocalDateTime.of(2020, 1, 1, 0,0,0);
-    private final LocalDateTime jan2 = LocalDateTime.of(2020,1,2,0,0,0);
+    private final LocalDateTime dec31 = LocalDateTime.of(2018, 12, 31, 0, 0, 0);
+    private final LocalDateTime jan1 = LocalDateTime.of(2019, 1, 1, 0,0,0);
+    private final LocalDateTime jan2 = LocalDateTime.of(2019,1,2,0,0,0);
 
     @Test
     public void  notNull() {
