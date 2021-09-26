@@ -1,5 +1,6 @@
 package org.xerris.core;
 
+import org.xerris.core.testDomain.Event;
 import org.xerris.core.testDomain.Person;
 import org.xerris.core.validation.Validate;
 
@@ -12,6 +13,15 @@ public class Assertions {
                 .is(actual.getAge()).equalTo(expected.getAge(), "age")
                 .is(actual.getBirthDate()).equalTo(expected.getBirthDate(), "birthDate")
                 .is(actual.getGender(), Object::equals, expected.getGender(), "gender")
+                .check();
+    }
+
+    public static void isEqualTo(Event actual, Event expected) {
+        Validate.begin()
+                .isNotNull(actual, "actual should not be null")
+                .isNotNull(expected, "expected should not be null")
+                .is(actual.getName()).equalTo(expected.getName(), "name)")
+                .is(actual.getWhen()).equalTo(expected.getWhen(), "birthDate")
                 .check();
     }
 }
