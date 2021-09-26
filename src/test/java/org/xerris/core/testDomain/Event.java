@@ -1,7 +1,5 @@
 package org.xerris.core.testDomain;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-
 import java.time.LocalDateTime;
 
 public class Event {
