@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.xerris.core.Person;
+import org.xerris.core.testDomain.Gender;
+import org.xerris.core.testDomain.Person;
 import org.xerris.core.exceptions.ArgumentException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -64,7 +65,7 @@ public class RangeTests {
 
     @Test
     public void forEach_withTypedParameterAndIncrementorInConstructor() {
-        Person littleJoey = new Person("Joey", 1);
+        Person littleJoey = new Person("Joey", 1, Gender.Other);
         assertThat(littleJoey.getAge()).isEqualTo(1);
 
         new Range<>(1, 5, x -> x+=1).forEach(littleJoey, Person::birthday);
@@ -74,7 +75,7 @@ public class RangeTests {
 
     @Test
     public void forEach_withTypedParameterAndIncrementorMethodArgument() {
-        Person littleJoey = new Person("Joey", 0);
+        Person littleJoey = new Person("Joey", 0, Gender.Male);
         assertThat(littleJoey.getAge()).isEqualTo(0);
 
         new Range<>(1, 5).forEach(x -> x+=1, littleJoey, Person::birthday);

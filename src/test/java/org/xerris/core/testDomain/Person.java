@@ -1,6 +1,4 @@
-package org.xerris.core;
-
-import org.assertj.core.internal.bytebuddy.asm.Advice;
+package org.xerris.core.testDomain;
 
 import java.time.LocalDate;
 
@@ -8,20 +6,25 @@ public class Person {
     private String name;
     private int age;
     private LocalDate birthDate;
+    private Gender gender;
 
-    public Person(String name, int age) {
-        this(name, age, LocalDate.now());
+    public Person() { } //required for serialization
+
+    public Person(String name, int age, Gender gender) {
+        this(name, age, gender, LocalDate.now());
     }
 
-    public Person(String name, int age, LocalDate birthDate) {
+    public Person(String name, int age, Gender gender, LocalDate birthDate) {
         this.name = name;
         this.age = age;
         this.birthDate = birthDate;
+        this.gender = gender;
     }
 
     public String getName() { return this.name; }
     public int getAge() { return this.age; }
     public LocalDate getBirthDate() { return this.birthDate; }
+    public Gender getGender() { return this.gender; }
 
     public void birthday() { age += 1;}
 

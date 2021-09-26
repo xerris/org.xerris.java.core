@@ -1,5 +1,6 @@
 package org.xerris.core.validation;
 
+import org.xerris.core.utils.IFunction;
 import org.xerris.core.validation.validators.*;
 
 import java.lang.reflect.Type;
@@ -43,6 +44,11 @@ public class Validate {
     }
 
     public <T> Validate is(T first, BiPredicate predicate, T second, String message) {
+        compareTests.add(ComparatorCondition.of(predicate, first, second, message));
+        return this;
+    }
+
+    public <E extends Enum<?>> Validate is(E first, BiPredicate predicate, E second, String message) {
         compareTests.add(ComparatorCondition.of(predicate, first, second, message));
         return this;
     }

@@ -2,7 +2,8 @@ package org.xerris.core.utils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.xerris.core.Person;
+import org.xerris.core.testDomain.Gender;
+import org.xerris.core.testDomain.Person;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -10,7 +11,7 @@ public class AggregateTypedCommandTest {
     private Person monty;
 
     @BeforeEach
-    public void beforeEach() { monty = new Person("Monty", 13);}
+    public void beforeEach() { monty = new Person("Monty", 13, Gender.Female);}
 
     @Test
     public void one() {

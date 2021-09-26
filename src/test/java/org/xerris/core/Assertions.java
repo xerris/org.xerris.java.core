@@ -1,5 +1,6 @@
 package org.xerris.core;
 
+import org.xerris.core.testDomain.Person;
 import org.xerris.core.validation.Validate;
 
 public class Assertions {
@@ -10,6 +11,7 @@ public class Assertions {
                 .is(actual.getName()).equalTo(expected.getName(), "name)")
                 .is(actual.getAge()).equalTo(expected.getAge(), "age")
                 .is(actual.getBirthDate()).equalTo(expected.getBirthDate(), "birthDate")
+                .is(actual.getGender(), Object::equals, expected.getGender(), "gender")
                 .check();
     }
 }
